@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050505;
+  --foreground: #e0e0e0;
+  --card-bg: #0a0a0a;
+  --card-border: #333;
+  --neon-cyan: #00f3ff;
+  --neon-pink: #ff00ff;
+  --neon-green: #0aff00;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-mono); /* Default to mono for coder vibe */
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  /* Cyberpunk Grid */
+  background-image: 
+    linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Cyberpunk Card */
+.pro-card {
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid #333;
+  border-left: 4px solid var(--neon-cyan); /* Accent border */
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Corner accent */
+.pro-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, transparent 50%, var(--neon-pink) 50%);
+}
+
+/* Cyberpunk Input Style (Underline based on image) */
+.cmd-input-group {
+  position: relative;
+  margin-bottom: 32px; /* More space for floating label effect */
+}
+
+.cmd-label {
+  font-family: var(--font-mono);
+  font-size: 14px; /* Increased from 12px */
+  color: var(--neon-cyan);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+}
+
+.cmd-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #333;
+  border-radius: 0;
+  padding: 12px 0;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.cmd-input:focus {
+  outline: none;
+  border-bottom-color: var(--neon-pink);
+  box-shadow: 0 4px 4px -4px rgba(255, 0, 255, 0.5);
+}
+
+.cmd-input::placeholder {
+  color: #555;
+}
+
+/* Technical Button - Cyberpunk Style */
+.btn-pro {
+  background: transparent;
+  color: var(--neon-cyan);
+  border: 1px solid var(--neon-cyan);
+  padding: 16px 24px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.btn-pro:hover:not(:disabled) {
+  background: var(--neon-cyan);
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+}
+
+.btn-pro:disabled {
+  border-color: #333;
+  color: #555;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Terminal / Log Output */
+.terminal-window {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #333;
+  padding: 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--neon-green);
+  line-height: 1.6;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.log-entry {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.log-prefix {
+  color: var(--neon-pink);
+  font-weight: bold;
+}
+
+.log-success { color: var(--neon-green); }
+.log-error { color: #ff0000; }
+.log-info { color: var(--neon-cyan); }
+
+/* Glitch Text Effect for Title */
+.glitch-text {
+  position: relative;
+  color: #fff;
+  text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-cyan);
+  animation: glitch 1s infinite reverse;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-cyan); }
+  25% { text-shadow: -2px 2px var(--neon-cyan), 2px -2px var(--neon-pink); }
+  50% { text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-cyan); }
+  75% { text-shadow: -2px -2px var(--neon-cyan), 2px 2px var(--neon-pink); }
+  100% { text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-cyan); }
+}
+
+/* Blinking Cursor */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  background: var(--neon-green);
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-pink);
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
